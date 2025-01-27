@@ -3,7 +3,7 @@ from TikTokLive.events import LikeEvent, CommentEvent, GiftEvent
 import json
 
 # Inicializar o cliente
-client = TikTokLiveClient(unique_id="@username_tiktok")
+client = TikTokLiveClient(unique_id="anjogabriel03")
 
 # Variável para armazenar dados
 live_data = []
