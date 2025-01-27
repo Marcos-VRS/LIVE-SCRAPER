@@ -1,6 +1,6 @@
 from celery import shared_task
 import json
-from views.scrapper import live_data
+from live_scraper.views.scraper import live_data
 
 
 @shared_task

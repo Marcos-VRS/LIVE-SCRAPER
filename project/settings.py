@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "live_scrapper",
+    "live_scraper",
     "channels",
 ]
 CHANNEL_LAYERS = {

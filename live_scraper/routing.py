@@ -1,5 +1,5 @@
 from django.urls import path, re_path
-from live_scrapper.consumers import LiveConsumer
+from live_scraper.consumers import LiveConsumer
 
 websocket_urlpatterns = [
     re_path(
