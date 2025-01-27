@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseBadRequest
-from Numbers.models import LiveDataBatch  # Modelo atualizado para armazenar JSON
+from live_scraper.models import LiveInfo  # Modelo atualizado para armazenar JSON
 import time
 
 # Lista global para acumular coletas (pode ser substituída por um cache)
@@ -21,7 +21,7 @@ live_platform = ""  # Variável global para armazenar a plataforma da live
 def save_collected_data_on_exit():
     global collected_data, live_title, live_platform
     if collected_data:
-        LiveDataBatch.objects.create(
+        LiveInfo.objects.create(
             title=live_title,
             platform=live_platform,
             json_data=collected_data,
@@ -98,7 +98,7 @@ def live_scrapper(request):
             # Verifica se a quantidade de coletas atingiu 50 ou mais
             if len(collected_data) >= 50:
                 # Salva o lote no banco de dados com título e plataforma fora do JSON
-                LiveDataBatch.objects.create(
+                LiveInfo.objects.create(
                     title=live_title, platform=live_platform, json_data=collected_data
                 )
                 print(
@@ -111,7 +111,7 @@ def live_scrapper(request):
 
             # Salva o JSON imediatamente se ocorrer um erro
             if collected_data:
-                LiveDataBatch.objects.create(
+                LiveInfo.objects.create(
                     title=live_title, platform=live_platform, json_data=collected_data
                 )
                 print(
