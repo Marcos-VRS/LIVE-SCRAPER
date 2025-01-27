@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Test</title>
+    <script>
+        const socket = new WebSocket("ws://127.0.0.1:8000/ws/live/");
+
+        socket.onopen = function(event) {
+            console.log("Conectado ao WebSocket");
+            socket.send(JSON.stringify({ message: "Teste de conexão" }));
+        };
+
+        socket.onmessage = function(event) {
+            console.log("Mensagem recebida:", event.data);
+        };
+
+        socket.onerror = function(error) {
+            console.error("Erro no WebSocket:", error);
+        };
+    </script>
+</head>
+<body>
+    <h1>Teste WebSocket</h1>
+</body>
+</html>
