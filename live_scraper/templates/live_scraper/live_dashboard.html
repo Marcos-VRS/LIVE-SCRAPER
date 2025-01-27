@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Dashboard</title>
+</head>
+
+<body>
+    <div>
+        <h1>Dados da Live</h1>
+        
+        <!-- Exibe o título da live -->
+        <h2>{{ live_title }}</h2>
+
+        <!-- Exibe a plataforma -->
+        <p>Plataforma: {{ live_platform }}</p>
+
+        <!-- Exibe os dados coletados -->
+        <h3>Dados coletados:</h3>
+        <ul>
+            {% for data in collected_data %}
+                <li>Visualizações: {{ data.views }} - Likes: {{ data.likes }} - Coletado em: {{ data.scraped_at }}</li>
+            {% endfor %}
+        </ul>
+        
+    </div>
+</body>
+
+</html>

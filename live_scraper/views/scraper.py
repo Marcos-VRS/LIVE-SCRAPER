@@ -36,7 +36,7 @@ def save_collected_data_on_exit():
 atexit.register(save_collected_data_on_exit)
 
 
-def live_scrapper(request):
+def live_scraper(request):
     global collected_data, live_title, live_platform  # Para manter os dados entre as execuções
 
     if request.method == "POST":
@@ -46,7 +46,7 @@ def live_scrapper(request):
 
         # Configuração do ChromeDriver
         driver_path = (
-            "C:\\Users\\Marcos\\Desktop\\LIVE SCRAP\\drivers\\chromedriver.exe"
+            "C:\\Users\\Marcos\\Desktop\\PROJETO - Numbers\\drivers\\chromedriver.exe"
         )
         chrome_options = Options()
         chrome_options.add_argument("--headless")
@@ -123,6 +123,6 @@ def live_scrapper(request):
             # Fecha o navegador
             driver.quit()
 
-        return render(request, "Numbers/live_dashboard.html")
+        return render(request, "lives_scraper/live_dashboard.html")
 
     return HttpResponseBadRequest("Método não suportado.")

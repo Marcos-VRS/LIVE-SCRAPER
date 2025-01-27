@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebSocket Test</title>
+
+    <form method="POST" action="{% url 'live_scraper:live_scraper' %}">
+        {% csrf_token %}
+        <label for="live_url">URL da live:</label>
+        <input type="text" id="live_url" name="live_url" required>
+        <button type="submit">Iniciar Coleta</button>
+    </form>
+    
     <script>
         const socket = new WebSocket("ws://127.0.0.1:8000/ws/live/");
 
