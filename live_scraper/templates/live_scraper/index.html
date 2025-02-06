@@ -1,35 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebSocket Test</title>
-
-    <form method="POST" action="{% url 'live_scraper:live_scraper' %}">
-        {% csrf_token %}
+    <title>LIVE SCRAPER</title>
+</head>
+<body>
+    <form id="liveForm">
         <label for="live_url">URL da live:</label>
         <input type="text" id="live_url" name="live_url" required>
         <button type="submit">Iniciar Coleta</button>
     </form>
-    
+
     <script>
         const socket = new WebSocket("ws://127.0.0.1:8000/ws/live/");
 
-        socket.onopen = function(event) {
+        socket.onopen = function() {
             console.log("Conectado ao WebSocket");
-            socket.send(JSON.stringify({ message: "Teste de conexão" }));
         };
 
         socket.onmessage = function(event) {
-            console.log("Mensagem recebida:", event.data);
+            const data = JSON.parse(event.data);
+
+            if (data.error) {
+                alert(data.error); // Mostra o erro recebido
+                return;
+            }
+
+            if (data.live_title) {
+                console.log("Dados da live recebidos:", data);
+
+                // Salva os dados no LocalStorage (ou qualquer outra forma)
+                localStorage.setItem("live_data", JSON.stringify(data));
+
+                // Redireciona para a página do dashboard
+                window.location.href = "/live_dashboard/";
+            }
         };
 
         socket.onerror = function(error) {
             console.error("Erro no WebSocket:", error);
         };
+
+        document.getElementById("liveForm").onsubmit = function(event) {
+            event.preventDefault();
+
+            const liveUrl = document.getElementById("live_url").value;
+            if (liveUrl) {
+                socket.send(JSON.stringify({ live_url: liveUrl }));
+            } else {
+                alert("A URL da live é obrigatória.");
+            }
+        };
     </script>
-</head>
-<body>
-    <h1>Teste WebSocket</h1>
 </body>
 </html>

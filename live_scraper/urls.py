@@ -10,5 +10,5 @@ urlpatterns = [
     path(
         "", views.index, name="index"
     ),  # O índice será acessado diretamente em /live-scraper/
-    path("live_scraper/", views.live_scraper, name="live_scraper"),
+    path("live_darshboard/", views.live_dashboard, name="live_dashboard"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
